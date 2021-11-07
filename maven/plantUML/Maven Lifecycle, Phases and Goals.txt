@@ -1,0 +1,16 @@
+@startuml
+
+title "Maven Lifecycle, Phases and Goals"
+
+abstract BuildLifecycle
+
+BuildLifecycle "1" *-- "1..*" Phase : groups
+Goal "0..*" -right-* "*" Phase : bounds
+Plugin "1" *-- "1..*" Goal : have
+
+legend
+**Goal** is the single unit of task which does some real work.
+**Phase** is a group of ordered goals.
+**Build Lifecycle** is a group of ordered phases. Build lifecycle cannot be executed.
+endlegend
+@enduml
