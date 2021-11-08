@@ -1,0 +1,41 @@
+@startuml
+
+title "Maven Big Picture"
+
+component "Local Repository" as repo <<repository>> {
+  artifact  "\~/.m2/settings.xml"
+}
+
+component "Maven Central" as central <<remote repository>>
+
+note left
+ Plugins
+ Dependencies
+endnote
+
+[compile] <<phase>>
+[package] <<phase>>
+[test] <<phase>>
+
+[maven-compiler-plugin] <<plugin>>
+[maven-jar-plugin] <<plugin>>
+[maven-surfire-plugin] <<plugin>>
+
+[compiler:compile] <<goal>>
+[jar:jar] <<goal>>
+ [surfire:test] <<goal>>
+
+central <- [Maven]
+[Maven] -> repo
+[Maven] --> [compile]
+[Maven] --> [package]
+[Maven] --> [test]
+[compile] --> [maven-compiler-plugin]
+[package] --> [maven-jar-plugin]
+[test] --> [maven-surfire-plugin]
+
+[maven-compiler-plugin] --> [compiler:compile]
+[maven-jar-plugin] --> [jar:jar]
+[maven-surfire-plugin] --> [surfire:test]
+
+@enduml
